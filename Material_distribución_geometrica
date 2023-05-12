@@ -1,0 +1,97 @@
+#Librería 
+from scipy.stats import geom # Representa una distribucion geométrica con tasa éxito p 
+import numpy as np # Areglos de matrices y arreglos de números en general 
+import matplotlib.pyplot as plt # Permite desarrollar visualizaciones
+import seaborn as sns 
+
+
+## Distibución Geométrica
+
+$$
+P(X=k) = p (1-p)^{k-1}
+$$
+## k = número de intentos
+## p= probabilidad de éxito 
+
+
+
+p =0.4  # parámetro de forma 
+k=5
+geometrica = geom.pmf(k,p) # pmf equivalente a la densidad de probabilidad
+geometrica
+
+p =0.4  # parámetro de forma 
+k=5
+sum_geom=0
+for i in [1,2,3,4,5,6]:
+  sum_geom= sum_geom+geom.pmf(i,p)
+
+geometrica = geom.cdf(k,p) # cdf equivalente a la densidad acumulada 
+geometrica
+
+# Crear objeto de distribución geométrica
+p=0.4
+n_bolillas =10
+distr_geom = geom(p)
+k = np.arange(1, n_bolillas + 1)
+probs_azul = distr_geom.pmf(k)
+# Graficar función de masa de probabilidad
+plt.stem(k, probs_azul, use_line_collection=True)
+plt.title('Distribución geométrica')
+plt.xlabel('Número de intentos hasta sacar la bola azul')
+plt.ylabel('Probabilidad')
+plt.show()
+
+
+
+# Graficar histograma de la distribución de probabilidad
+plt.bar(k, probs_azul, align='center', alpha=0.5)
+plt.xticks(k)
+plt.xlabel('Número de intentos hasta el primer éxito')
+plt.ylabel('Probabilidad')
+plt.title('Distribución geométrica')
+plt.show()
+
+
+### Ejercicio
+Supongamos que tenemos una urna con 10 bolillas, de las cuales 4 son rojas y 6 son azules.
+Se extrae 1 bolilla, si es roja se vuelve a colocar la bolilla en la urna y mezclamos (con reposición), repetimos hasta extraer 1 azul y terminamos el experimento.
+1. Hallar la probabilidad que haya que hacer exactamente 3 extracciones.
+2. Hallar la probabilidad que haya que hacer como máximo 3 extracciones.
+3. Graficar función de masa de probabilidad
+4. Graficar histograma de la distribución de probabilidad
+
+p =0.6  # parámetro de forma 
+k=3
+geometrica = geom.pmf(k,p) # pmf equivalente a la densidad de probabilidad
+print("Hallar la probabilidad que haya que hacer exactamente 3 extracciones. Respuesta: {}".format(geometrica))
+
+p =0.6  # parámetro de forma 
+k=3
+sum_geom=0
+for i in [1,2,3,4]:
+  sum_geom= sum_geom+geom.pmf(i,p)
+
+geometrica = geom.cdf(k,p) # cdf equivalente a la densidad acumulada 
+print("Hallar la probabilidad que haya que hacer como máximo 3 extracciones. Respuesta: {}".format(geometrica))
+
+# Crear objeto de distribución geométrica
+p=0.6
+n_bolillas =10
+distr_geom = geom(p)
+k = np.arange(1, n_bolillas + 1)
+probs_azul = distr_geom.pmf(k)
+# Graficar función de masa de probabilidad
+plt.stem(k, probs_azul, use_line_collection=True)
+plt.title('Distribución geométrica')
+plt.xlabel('Número de intentos hasta sacar la bola azul')
+plt.ylabel('Probabilidad')
+plt.show()
+
+# Graficar histograma de la distribución de probabilidad
+plt.bar(k, probs_azul, align='center', alpha=0.5)
+plt.xticks(k)
+plt.xlabel('Número de intentos hasta el primer éxito')
+plt.ylabel('Probabilidad')
+plt.title('Distribución geométrica'.format())
+plt.show()
